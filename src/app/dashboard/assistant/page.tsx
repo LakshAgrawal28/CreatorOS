@@ -55,20 +55,17 @@ export default function AssistantPage() {
 
     try {
       // Call generate endpoint
-      const res = await fetch("/api/creator/studio/generate", {
+      const res = await fetch("/api/creator/assistant", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          productName: "AI Assistant",
-          coreMessage: textToSend,
-          styleTone: "helpful",
-          length: "short",
+          message: textToSend,
         }),
       });
 
       if (res.ok) {
         const data = await res.json();
-        const responseText = data.script || data.caption || "I've processed your request. How else can I help you today?";
+        const responseText = data.reply || "I've processed your request. How else can I help you today?";
         
         const aiMsg: ChatMessage = {
           id: `a-${Date.now()}`,
@@ -81,36 +78,14 @@ export default function AssistantPage() {
         throw new Error();
       }
     } catch (e) {
-      // Simulate rich responsive fallback representing the mockup stats
-      setTimeout(() => {
-        let aiMsg: ChatMessage;
-        
-        if (textToSend.toLowerCase().includes("view") || textToSend.toLowerCase().includes("dropping")) {
-          aiMsg = {
-            id: `a-fallback-${Date.now()}`,
-            sender: "assistant",
-            text: "I've analyzed your latest tech reviews compared to your channel baseline. The primary issue appears to be a drop in early viewer retention. Your intros have extended from 15 seconds to 45 seconds on average. Try cutting straight to the product unboxing.",
-            time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-            stats: {
-              avgViewDuration: { value: "3m 12s", change: "18%", isUp: false },
-              ctr: { value: "4.2%", change: "Flat", isFlat: true }
-            }
-          };
-        } else {
-          aiMsg = {
-            id: `a-fallback-${Date.now()}`,
-            sender: "assistant",
-            text: `Here is a custom recommendation draft for you:
-
-1. **デスクセットアップ (Desk Setup v2)**: Focus on lo-fi audio tracks, which increase shares by 21% based on current Tech & Gadgets trends.
-2. **Dynamic Transitions**: Use quick cuts in the first 3 seconds of your Gymwear or Brand Sponsor reels to capture attention immediately.
-3. **Razorpay Escrow Safety**: Remember to lock agreements in Escrow prior to publication to guarantee secure platform payouts.`,
-            time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-          };
-        }
-        
-        setMessages((prev) => [...prev, aiMsg]);
-      }, 1000);
+      // Basic fallback if API fails entirely
+      const aiMsg: ChatMessage = {
+        id: `a-fallback-${Date.now()}`,
+        sender: "assistant",
+        text: "I am having trouble connecting to the AI backend right now. Please check your internet connection or try again later.",
+        time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      };
+      setMessages((prev) => [...prev, aiMsg]);
     } finally {
       setGenerating(false);
     }

@@ -11,11 +11,14 @@ const genAI = new GoogleGenerativeAI(geminiApiKey);
  */
 export async function POST(req: NextRequest) {
   try {
+    const geminiApiKey = process.env.GEMINI_API_KEY || "";
+    
     if (!geminiApiKey) {
       console.warn("GEMINI_API_KEY is not defined. Returning mock script data.");
       return NextResponse.json(getMockScriptResponse());
     }
 
+    const genAI = new GoogleGenerativeAI(geminiApiKey);
     const body = await req.json();
     const { productName, coreMessage, styleTone, length } = body;
 
@@ -51,10 +54,21 @@ export async function POST(req: NextRequest) {
     });
 
     const result = await model.generateContent(prompt);
-    const text = result.response.text();
+    let text = result.response.text().trim();
+
+    // Remove markdown json block if Gemini mistakenly adds it
+    if (text.startsWith("\`\`\`json")) {
+      text = text.substring(7);
+    } else if (text.startsWith("\`\`\`")) {
+      text = text.substring(3);
+    }
+    if (text.endsWith("\`\`\`")) {
+      text = text.substring(0, text.length - 3);
+    }
+    text = text.trim();
 
     try {
-      const parsedData = JSON.parse(text.trim());
+      const parsedData = JSON.parse(text);
       return NextResponse.json(parsedData);
     } catch (parseError) {
       console.error("Failed to parse Gemini response as JSON. Raw text:", text);
