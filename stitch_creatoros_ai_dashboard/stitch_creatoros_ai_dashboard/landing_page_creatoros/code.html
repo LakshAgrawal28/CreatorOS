@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CreatorOS | Premium Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-low": "#f3f3f3",
+                      "surface-container-high": "#e8e8e8",
+                      "tertiary-fixed-dim": "#c7c6c6",
+                      "on-primary-container": "#858383",
+                      "on-error-container": "#93000a",
+                      "inverse-primary": "#c8c6c5",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-container": "#1b1c1c",
+                      "on-secondary-fixed-variant": "#753400",
+                      "background": "#f9f9f9",
+                      "on-background": "#1a1c1c",
+                      "on-secondary-fixed": "#321200",
+                      "on-tertiary-fixed-variant": "#464747",
+                      "on-primary-fixed": "#1c1b1b",
+                      "surface": "#f9f9f9",
+                      "on-tertiary-container": "#848484",
+                      "on-tertiary-fixed": "#1b1c1c",
+                      "error-container": "#ffdad6",
+                      "secondary-container": "#fb7800",
+                      "tertiary-fixed": "#e4e2e2",
+                      "on-error": "#ffffff",
+                      "on-surface-variant": "#444748",
+                      "secondary": "#994700",
+                      "outline": "#747878",
+                      "surface-container-highest": "#e2e2e2",
+                      "secondary-fixed": "#ffdbc8",
+                      "on-surface": "#1a1c1c",
+                      "on-secondary-container": "#592600",
+                      "on-secondary": "#ffffff",
+                      "primary-container": "#1c1b1b",
+                      "tertiary": "#000000",
+                      "on-primary-fixed-variant": "#474646",
+                      "surface-variant": "#e2e2e2",
+                      "primary": "#000000",
+                      "surface-bright": "#f9f9f9",
+                      "surface-container": "#eeeeee",
+                      "surface-dim": "#dadada",
+                      "secondary-fixed-dim": "#ffb68b",
+                      "on-primary": "#ffffff",
+                      "inverse-on-surface": "#f1f1f1",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed": "#e5e2e1",
+                      "outline-variant": "#c4c7c7",
+                      "inverse-surface": "#2f3131",
+                      "surface-tint": "#5f5e5e",
+                      "error": "#ba1a1a",
+                      "primary-fixed-dim": "#c8c6c5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "container-padding": "32px",
+                      "stack-md": "16px",
+                      "stack-sm": "8px",
+                      "max-width-content": "1200px",
+                      "stack-lg": "32px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "data-label": [
+                              "Space Grotesk"
+                      ],
+                      "data-value": [
+                              "Space Grotesk"
+                      ],
+                      "headline-lg-mobile": [
+                              "Sora"
+                      ],
+                      "headline-lg": [
+                              "Sora"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Sora"
+                      ]
+              },
+              "fontSize": {
+                      "data-label": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "data-value": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "64px",
+                              {
+                                      "lineHeight": "72px",
+                                      "letterSpacing": "-0.03em",
+                                      "fontWeight": "800"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid theme('colors.surface-variant');
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        .bento-card {
+            background-color: theme('colors.surface-container-lowest');
+            border: 1px solid theme('colors.surface-variant');
+            border-radius: theme('borderRadius.xl');
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, theme('colors.primary'), theme('colors.secondary-container'));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Smooth reveal animation classes */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden selection:bg-secondary-container selection:text-white">
+<!-- Navbar -->
+<nav class="fixed top-0 z-50 flex justify-between items-center w-full px-container-padding h-20 bg-white/70 backdrop-blur-xl border-b border-outline-variant/30 transition-all duration-300">
+<div class="flex items-center gap-4">
+<img alt="CreatorOS Logo" class="h-10 w-10 object-contain rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5N6wWb9sJllShveUNXHhXb3BHIb5zzzcOJ33b9zMNUT7zBUojlTrXwqUNfFfXmMxcihwH9uQI_FYo_hEgbeW9TV3mvQeMxk0O73FQ1Bt7YE33Dm7oNlYyLx58piKomdsooe88HTYpT2LHOcV7H40ouS6WcMh2pkspRIAqd1cBTqvurvm5wVKnShLOhbLk6aRW-S2F6B3vNQPz-JmRMId625CYTQ0HAa9Et5jDH-2Gidg9NbImLLq9PUV1vWnSyfnUw0gBYjl1kXg"/>
+<span class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight">CreatorOS</span>
+</div>
+<div class="hidden md:flex items-center gap-8 font-data-label text-data-label uppercase">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#problem">Problem</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#features">Features</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#architecture">Tech</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#pricing">Pricing</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block px-6 py-2 rounded-xl border border-outline-variant text-primary font-data-label text-data-label uppercase hover:bg-surface-container-low transition-colors duration-200">
+                Book Demo
+            </button>
+<button class="px-6 py-2 rounded-xl bg-primary text-white font-data-label text-data-label uppercase hover:scale-[0.98] transition-transform duration-200 shadow-lg shadow-primary/20">
+                Start Free
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-24">
+<!-- Hero Section -->
+<section class="relative max-w-[1200px] mx-auto px-container-padding flex flex-col items-center text-center mb-40 reveal-up">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high border border-outline-variant mb-8">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-data-label text-data-label uppercase text-on-surface-variant tracking-widest">CreatorOS 2.0 is live</span>
+</div>
+<h1 class="font-display-lg text-display-lg md:text-[80px] md:leading-[90px] text-primary max-w-4xl mb-8">
+                The operating system for <br/> <span class="text-gradient">billion-dollar</span> creators.
+            </h1>
+<p class="font-body-md text-body-md md:text-xl text-on-surface-variant max-w-2xl mb-12">
+                Consolidate your stack, automate your workflows, and scale your audience with the premium AI-native dashboard designed for high-performance content teams.
+            </p>
+<div class="flex flex-col sm:flex-row gap-4 mb-20 w-full justify-center">
+<button class="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-white font-data-label text-data-label uppercase hover:scale-[0.98] transition-transform duration-200 shadow-xl shadow-primary/20 flex items-center justify-center gap-2">
+                    Start Free Trial
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="w-full sm:w-auto px-8 py-4 rounded-xl border border-outline-variant text-primary font-data-label text-data-label uppercase hover:bg-surface-container-low transition-colors duration-200 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">play_circle</span>
+                    Watch Demo
+                </button>
+</div>
+<!-- Dashboard Mockup -->
+<div class="relative w-full max-w-6xl aspect-[16/9] rounded-2xl overflow-hidden glass-panel p-2 md:p-4 shadow-2xl shadow-primary/10 mx-auto">
+<div class="w-full h-full bg-surface-container-lowest rounded-xl overflow-hidden border border-surface-variant flex relative">
+<!-- Mock Sidebar -->
+<div class="hidden md:flex w-64 bg-surface-container-lowest border-r border-surface-variant flex-col py-6 px-4 shrink-0">
+<div class="flex items-center gap-3 mb-10 px-2">
+<div class="w-8 h-8 rounded-lg bg-primary"></div>
+<div class="font-data-value text-data-value text-primary">CreatorOS</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3 px-3 py-2 bg-surface-container-low rounded-lg border-l-4 border-secondary-container">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-data-label text-data-label text-primary font-bold">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+<span class="font-data-label text-data-label">Analytics</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+<span class="font-data-label text-data-label">AI Studio</span>
+</div>
+</div>
+</div>
+<!-- Mock Content Area -->
+<div class="flex-1 p-6 bg-background flex flex-col gap-6 overflow-hidden">
+<!-- Top header -->
+<div class="flex justify-between items-center w-full">
+<div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Overview</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Your performance across all platforms.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="px-4 py-2 bg-white rounded-lg border border-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]">calendar_today</span>
+<span class="font-data-label text-data-label text-primary">Last 30 Days</span>
+</div>
+</div>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-white p-4 rounded-xl border border-surface-variant">
+<div class="font-data-label text-data-label text-on-surface-variant uppercase mb-2">Total Views</div>
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">12.4M</div>
+<div class="flex items-center gap-1 text-secondary-container">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span class="font-data-label text-data-label">24% vs last month</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl border border-surface-variant hidden md:block">
+<div class="font-data-label text-data-label text-on-surface-variant uppercase mb-2">Engagement Rate</div>
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">8.2%</div>
+<div class="flex items-center gap-1 text-secondary-container">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span class="font-data-label text-data-label">1.2% vs last month</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl border border-surface-variant hidden md:block">
+<div class="font-data-label text-data-label text-on-surface-variant uppercase mb-2">Est. Revenue</div>
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">$42.8k</div>
+<div class="flex items-center gap-1 text-secondary-container">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span class="font-data-label text-data-label">12% vs last month</span>
+</div>
+</div>
+</div>
+<!-- Main Chart Area -->
+<div class="flex-1 bg-white rounded-xl border border-surface-variant p-4 relative overflow-hidden">
+<!-- Abstract graphic representing a chart -->
+<div class="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-secondary-fixed-dim/20 to-transparent"></div>
+<svg class="absolute bottom-0 left-0 w-full h-[60%]" preserveaspectratio="none" viewbox="0 0 100 100">
+<path class="text-secondary-container" d="M0,100 L0,50 Q25,30 50,60 T100,20 L100,100 Z" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<!-- Overlay Gradient to emphasize depth -->
+<div class="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent pointer-events-none"></div>
+</div>
+</div>
+</section>
+</main>
+<script>
+        // Simple Intersection Observer for smooth reveal animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            document.querySelectorAll('.reveal-up').forEach((el) => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body></html>

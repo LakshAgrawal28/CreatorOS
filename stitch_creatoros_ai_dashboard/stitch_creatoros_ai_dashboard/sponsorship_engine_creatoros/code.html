@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Brand Match Engine - CreatorOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Sora:wght@400;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-dim": "#dadada",
+                      "primary-fixed-dim": "#c8c6c5",
+                      "outline": "#747878",
+                      "on-primary-fixed": "#1c1b1b",
+                      "inverse-surface": "#2f3131",
+                      "tertiary-fixed": "#e4e2e2",
+                      "secondary-fixed": "#ffdbc8",
+                      "primary-fixed": "#e5e2e1",
+                      "surface-container": "#eeeeee",
+                      "secondary-container": "#fb7800",
+                      "on-tertiary-fixed-variant": "#464747",
+                      "secondary-fixed-dim": "#ffb68b",
+                      "primary-container": "#1c1b1b",
+                      "tertiary": "#000000",
+                      "secondary": "#994700",
+                      "on-primary-container": "#858383",
+                      "inverse-primary": "#c8c6c5",
+                      "surface": "#f9f9f9",
+                      "on-primary": "#ffffff",
+                      "on-background": "#1a1c1c",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#753400",
+                      "on-tertiary-container": "#848484",
+                      "background": "#f9f9f9",
+                      "surface-container-high": "#e8e8e8",
+                      "on-tertiary-fixed": "#1b1c1c",
+                      "on-surface-variant": "#444748",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed": "#321200",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-error-container": "#93000a",
+                      "on-surface": "#1a1c1c",
+                      "error": "#ba1a1a",
+                      "inverse-on-surface": "#f1f1f1",
+                      "surface-variant": "#e2e2e2",
+                      "surface-container-low": "#f3f3f3",
+                      "tertiary-fixed-dim": "#c7c6c6",
+                      "surface-bright": "#f9f9f9",
+                      "surface-container-highest": "#e2e2e2",
+                      "outline-variant": "#c4c7c7",
+                      "on-secondary-container": "#592600",
+                      "tertiary-container": "#1b1c1c",
+                      "surface-tint": "#5f5e5e",
+                      "primary": "#000000",
+                      "on-error": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-padding": "32px",
+                      "stack-sm": "8px",
+                      "gutter": "24px",
+                      "stack-lg": "32px",
+                      "unit": "4px",
+                      "stack-md": "16px",
+                      "max-width-content": "1200px"
+              },
+              "fontFamily": {
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Sora"
+                      ],
+                      "display-lg": [
+                              "Sora"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "data-value": [
+                              "Space Grotesk"
+                      ],
+                      "headline-lg": [
+                              "Sora"
+                      ],
+                      "data-label": [
+                              "Space Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-value": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "data-label": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(229, 229, 229, 0.5);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+        }
+        
+        .card-surface {
+            background-color: #FFFFFF;
+            border: 1px solid #E5E5E5;
+        }
+
+        .circular-chart {
+            display: block;
+            margin: 0 auto;
+            max-width: 80%;
+            max-height: 250px;
+        }
+        .circle-bg {
+            fill: none;
+            stroke: #eee;
+            stroke-width: 3.8;
+        }
+        .circle {
+            fill: none;
+            stroke-width: 2.8;
+            stroke-linecap: round;
+            animation: progress 1s ease-out forwards;
+        }
+        @keyframes progress {
+            0% {
+                stroke-dasharray: 0 100;
+            }
+        }
+        .percentage {
+            fill: #111111;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.5em;
+            text-anchor: middle;
+        }
+        
+        /* Hide scrollbar for horizontal scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+      </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden sticky top-0 z-50 flex justify-between items-center w-full px-container-padding h-16 bg-white/70 dark:bg-surface/70 backdrop-blur-xl border-b border-outline-variant/30 dark:border-outline/20">
+<div class="flex items-center gap-3">
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-on-primary-fixed tracking-tight">CreatorOS</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/30">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A detailed headshot of a confident young creator in a bright modern studio setting, soft cinematic lighting, professional photography, clean background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG906im7aMIeFIWVqO0S_j-jl2ziZvS9N2WHEJwh0dbKhOHlvwV_8-rge97bMAa4xx5XS-PGhbobtm0dXmPQMG8Ge0TjOYWvY-6Ds-PPO-pyXC3owJLia3zNRinp3Z0URHVmWYZSpHiY7PNl2tVDnUTNDjxOxg7alDJ2g3YhtUspEfI1cR-msj3ox659dSRIgxFYqIKv6gxivHZ2oPyYW6wNUUnorvjwRxfO4moa0iTG5_ARi3WUx5IDfNDncb-SKl_Iq0lpH2TAs"/>
+</div>
+</div>
+</header>
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex fixed left-0 top-0 h-screen flex-col justify-between py-stack-lg z-40 bg-white/70 dark:bg-surface/70 backdrop-blur-xl border-r border-outline-variant/30 dark:border-outline/20 w-64 docked">
+<div class="px-6 pb-6">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">hexagon</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold tracking-tight text-primary dark:text-on-primary-fixed leading-none">CreatorOS</h1>
+<span class="font-data-label text-data-label text-on-surface-variant uppercase tracking-wider">Premium Suite</span>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-body-sm text-body-sm font-medium py-3 rounded-xl mb-8 flex justify-center items-center gap-2 hover:scale-[0.98] transition-transform duration-200 shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+                    New Project
+                </button>
+<div class="space-y-1">
+<a class="text-on-surface-variant dark:text-on-tertiary-container flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-high/40 dark:hover:bg-tertiary-container/40 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-data-label text-data-label">Dashboard</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-container flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-high/40 dark:hover:bg-tertiary-container/40 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-data-label text-data-label">Trend Pulse</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-container flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-high/40 dark:hover:bg-tertiary-container/40 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-data-label text-data-label">Content Studio</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-container flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-high/40 dark:hover:bg-tertiary-container/40 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-data-label text-data-label">Analytics</span>
+</a>
+<a class="text-primary dark:text-on-primary-fixed font-bold border-l-4 border-secondary-container bg-surface-container-low/50 flex items-center gap-3 px-4 py-3 rounded-r-lg scale-[0.98] transition-all duration-200 ease-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">handshake</span>
+<span class="font-data-label text-data-label text-secondary-container">Sponsors</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-container flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-high/40 dark:hover:bg-tertiary-container/40 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-data-label text-data-label">Calendar</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-container flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-high/40 dark:hover:bg-tertiary-container/40 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-data-label text-data-label">AI Assistant</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-container flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-high/40 dark:hover:bg-tertiary-container/40 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-data-label text-data-label">Notifications</span>
+</a>
+</div>
+</div>
+<div class="px-6 border-t border-outline-variant/20 pt-4">
+<div class="space-y-1">
+<a class="text-on-surface-variant dark:text-on-tertiary-container flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-high/40 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-data-label text-data-label">Profile</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-container flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-high/40 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-data-label text-data-label">Settings</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-container flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-high/40 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">dark_mode</span>
+<span class="font-data-label text-data-label">Dark Mode</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-64 overflow-y-auto w-full bg-background relative">
+<div class="max-w-content mx-auto p-container-padding space-y-stack-lg pb-32">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+<div>
+<h2 class="font-display-lg text-display-lg font-bold text-primary tracking-tight mb-2">Brand Match Engine</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">AI-driven sponsorship discovery and outreach management designed for high-conversion creator partnerships.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+<div class="relative flex-1 sm:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-[#EDEDED] border-transparent focus:bg-white focus:border-primary focus:ring-0 rounded-lg font-body-sm text-body-sm text-primary transition-colors placeholder:text-on-surface-variant/70" placeholder="Search brands..." type="text"/>
+</div>
+<div class="relative w-full sm:w-auto">
+<select class="w-full appearance-none pl-4 pr-10 py-2.5 bg-[#EDEDED] border-transparent focus:bg-white focus:border-primary focus:ring-0 rounded-lg font-body-sm text-body-sm text-primary transition-colors cursor-pointer">
+<option>All Industries</option>
+<option>Tech &amp; Gadgets</option>
+<option>Lifestyle</option>
+<option>Education</option>
+<option>Fitness</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Section: Recommended Brands -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-lg text-headline-lg font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+                            Recommended Brands
+                        </h3>
+<button class="text-secondary-container font-data-label text-data-label hover:underline flex items-center gap-1">
+                            View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<!-- Horizontal Scroll Container -->
+<div class="flex gap-gutter overflow-x-auto pb-4 no-scrollbar -mx-container-padding px-container-padding snap-x">
+<!-- Card 1 -->
+<div class="card-surface rounded-xl p-6 min-w-[300px] flex-shrink-0 snap-center hover:shadow-sm transition-shadow flex flex-col justify-between">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center overflow-hidden border border-outline-variant/30">
+<img alt="Brand Logo" class="w-full h-full object-cover" data-alt="A clean, modern logo placeholder image for a tech audio brand, featuring subtle dark gradients and a minimalist icon, set against a pristine white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMf3D7T8dWNOagRHiwapsOQvOTuAs9wSAaIOJp1chO_nzvRfsTX2i-3cho7ZiA2BPUZ7xAgLJdlQOfQo71iXfPNzXFy6N_O5kUwkmt_TQA42tQKjwW4Md81UROgWhkOW7Pu01AmXCvk0yYTb2AadyC6rep4BqK6lQiP7YG7o1egLhRahx7ov7gCa9mQv_ybAqknyRl7wPK0LeRe0_4sp0gNz9gav__QybYzp7WlAYXZrkKUSN3J95C9tqCjR_IAfjCbG2xvWJXSfc"/>
+</div>
+<div>
+<h4 class="font-data-value text-data-value text-primary font-bold">Boat</h4>
+<span class="font-data-label text-data-label text-on-surface-variant">Consumer Audio</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant cursor-pointer hover:text-primary transition-colors">more_horiz</span>
+</div>
+<div class="flex items-center justify-center mb-6 relative">
+<svg class="circular-chart w-24 h-24" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831" stroke="#fb7800" stroke-dasharray="92, 100"></path>
+<text class="percentage" x="18" y="20.35">92%</text>
+</svg>
+<div class="absolute bottom-0 text-center w-full mt-2">
+<span class="font-data-label text-data-label text-on-surface-variant">Match Score</span>
+</div>
+</div>
+<button class="w-full bg-transparent border border-outline-variant text-primary font-body-sm text-body-sm font-medium py-2.5 rounded-lg hover:border-primary transition-colors mt-auto">
+                                Generate Proposal
+                            </button>
+</div>
+<!-- Card 2 -->
+<div class="card-surface rounded-xl p-6 min-w-[300px] flex-shrink-0 snap-center hover:shadow-sm transition-shadow flex flex-col justify-between">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center overflow-hidden border border-outline-variant/30">
+<img alt="Brand Logo" class="w-full h-full object-cover" data-alt="A sleek, minimalist logo placeholder for a lifestyle fitness brand, sharp typography, neutral tones, modern light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2cec2vdS52vNiougobe1HC6PwBzH7QhOocPiADY9A966KKA_9mQou0RvDytdz1kzuJvXDlsgRak5tHZblEwpQa1ZFBxCYTJFAU27s2zJdNkG3e-QIIKqEUKc2ExunfE-gya_Oak9-q7qwo89M_3kEOFejppiFKb6sdSrhL-Sf7thbolKY7Tmdc4IEv7fT3Orgkcx8oFeJ32kXokMlIPksjm57MrpCiOlBu1qo7UImT8RbsQ1VwmiFfJsN3cVqCW-bI_bhGlhYnA4"/>
+</div>
+<div>
+<h4 class="font-data-value text-data-value text-primary font-bold">Noise</h4>
+<span class="font-data-label text-data-label text-on-surface-variant">Wearables</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant cursor-pointer hover:text-primary transition-colors">more_horiz</span>
+</div>
+<div class="flex items-center justify-center mb-6 relative">
+<svg class="circular-chart w-24 h-24" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831" stroke="#fb7800" stroke-dasharray="88, 100"></path>
+<text class="percentage" x="18" y="20.35">88%</text>
+</svg>
+<div class="absolute bottom-0 text-center w-full mt-2">
+<span class="font-data-label text-data-label text-on-surface-variant">Match Score</span>
+</div>
+</div>
+<button class="w-full bg-transparent border border-outline-variant text-primary font-body-sm text-body-sm font-medium py-2.5 rounded-lg hover:border-primary transition-colors mt-auto">
+                                Generate Proposal
+                            </button>
+</div>
+<!-- Card 3 -->
+<div class="card-surface rounded-xl p-6 min-w-[300px] flex-shrink-0 snap-center hover:shadow-sm transition-shadow flex flex-col justify-between">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center overflow-hidden border border-outline-variant/30">
+<img alt="Brand Logo" class="w-full h-full object-cover" data-alt="An elegant, abstract logo placeholder for an online learning platform, using soft pastel colors and a clean geometric shape, premium startup feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0rQAxBdEVvNjxAl-tTnjFlVgP9X_26pGbim4B7sX6e9iUglHNch-mv2Ck0yS2rDxcI3SJLr4kA3l0ytGOyayXpyyhyMsIvvMaRWLFLVLIOmON1lV54x0eF5bp302SzSCf_iS7wXpWaOm3k02HeEtNsJDflCpy2Ow_bzz9mNGe8k00SyUcZaOymkJlI7YrUPLeWyCpBeyVmM8YjtOQ2H4mq7EaAeq8flUI2b8-rwBrSfR8Cp3DyhkN738Fmt60vJs1M1nrolrR70k"/>
+</div>
+<div>
+<h4 class="font-data-value text-data-value text-primary font-bold">Skillshare</h4>
+<span class="font-data-label text-data-label text-on-surface-variant">EdTech</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant cursor-pointer hover:text-primary transition-colors">more_horiz</span>
+</div>
+<div class="flex items-center justify-center mb-6 relative">
+<svg class="circular-chart w-24 h-24" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831" stroke="#fb7800" stroke-dasharray="75, 100"></path>
+<text class="percentage" x="18" y="20.35">75%</text>
+</svg>
+<div class="absolute bottom-0 text-center w-full mt-2">
+<span class="font-data-label text-data-label text-on-surface-variant">Match Score</span>
+</div>
+</div>
+<button class="w-full bg-transparent border border-outline-variant text-primary font-body-sm text-body-sm font-medium py-2.5 rounded-lg hover:border-primary transition-colors mt-auto">
+                                Generate Proposal
+                            </button>
+</div>
+<!-- Empty State / Add New Card -->
+<div class="card-surface rounded-xl p-6 min-w-[200px] flex-shrink-0 snap-center border-dashed border-2 hover:border-primary cursor-pointer transition-colors flex flex-col justify-center items-center group">
+<div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center mb-3 group-hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">add</span>
+</div>
+<span class="font-data-label text-data-label text-on-surface-variant group-hover:text-primary font-medium">Discover More</span>
+</div>
+</div>
+</section>
+<!-- Section: Outreach CRM -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-lg text-headline-lg font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">table_chart</span>
+                            Outreach CRM
+                        </h3>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">more_horiz</span>
+</button>
+</div>
+</div>
+<div class="card-surface rounded-xl overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50 border-b border-outline-variant/30">
+<th class="px-6 py-4 font-data-label text-data-label text-on-surface-variant uppercase tracking-wider font-semibold">Brand</th>
+<th class="px-6 py-4 font-data-label text-data-label text-on-surface-variant uppercase tracking-wider font-semibold">Match %</th>
+<th class="px-6 py-4 font-data-label text-data-label text-on-surface-variant uppercase tracking-wider font-semibold">Status</th>
+<th class="px-6 py-4 font-data-label text-data-label text-on-surface-variant uppercase tracking-wider font-semibold">Last Contact</th>
+<th class="px-6 py-4 font-data-label text-data-label text-on-surface-variant uppercase tracking-wider font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm divide-y divide-outline-variant/20">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container overflow-hidden">
+<img alt="Logo" class="w-full h-full object-cover" data-alt="Small crisp logo placeholder for an energy drink brand, minimal geometric shape, vibrant accents, clean light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDRJtPi1hw5P5AKYzVvEy2ekITofM2heD-oREf40yYDiJlDr0BWXc6r9l5IQLEi_3t4Yl0Y7CV6mWs8zXzdC7l0Er68VErNaoHokHXGbuet1mGYltTFOmiNQO4otumfNXDbTfWoqAwTP34K6FjojR3PUSBoYpZ4QTiGDWmQzzHPVJPNDGFyQ85CPB3i58co3ob-RyKHuB5n1tX2kN56VlLy3JlnQPFryABkAHEtnzMDnf6zfTtxPdtTHPeW62GC_6u7SDEHeE8bwo"/>
+</div>
+<span class="font-medium text-primary">Red Bull</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="font-data-value text-data-value text-primary">85%</span>
+<div class="w-16 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container" style="width: 85%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md font-data-label text-[10px] uppercase tracking-wider font-semibold bg-blue-100 text-blue-800 border border-blue-200">
+                                                Negotiating
+                                            </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">2 days ago</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary-container hover:text-secondary transition-colors opacity-0 group-hover:opacity-100 font-medium">Update</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container overflow-hidden">
+<img alt="Logo" class="w-full h-full object-cover" data-alt="Small crisp logo placeholder for a software tool, minimalist blue icon, clear typography, clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlPdwWU25hd1-fuFTR9eNFQBTzNfGMmzhuvCTWoMvLA9TktUiPoAVXs48BnEkzoQDa8QACNBUJaUlSUAKvP9ulqKGKWHh2gGbSHdI-AwOrznJTBF9gDuEyJnd19tfYmdTO3nbnd2CgYEt2pKGY1nKDsaEjIFwV_iYbD1wN59lOC9uZrfb3aLhjmtZIRcdFVAn2uhDtXlT_da-VkVfBVHHJuPYV0mizoTX0-hLJlWAsLVjqWmOYYsEmohsDCrz6BI4EeO4DSAHhxbw"/>
+</div>
+<span class="font-medium text-primary">Notion</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="font-data-value text-data-value text-primary">95%</span>
+<div class="w-16 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container" style="width: 95%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md font-data-label text-[10px] uppercase tracking-wider font-semibold bg-green-100 text-green-800 border border-green-200">
+                                                Closed
+                                            </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">1 week ago</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary-container hover:text-secondary transition-colors opacity-0 group-hover:opacity-100 font-medium">View Deal</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container overflow-hidden">
+<img alt="Logo" class="w-full h-full object-cover" data-alt="Small crisp logo placeholder for a mattress brand, soft organic shapes, muted purple and grey tones, clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBxlCUPt-E5l6fHYa8sltuRGLl70FIX9yRWfUEafmJbU-9ZrHP-Lnio1s9ToFxWhpICqw5g3ZRQq5wtebFClWaJTUIh1RWQ8xHbGkqdoMFz2dzqyUHKBU7sBeTuGOm25HOfCMpgwagxciNhHwin7reXYbqME6mMAL5K8_5qm_HLn4WEEl1vlgY3qXGU-ogQsPM-sax8LNpfC6xEqFMKspuoAQoNCPppT5Bkw-Le1grqU16PWDr74pP1nvJCtXtmOqX3cov6zh80aI"/>
+</div>
+<span class="font-medium text-primary">Casper</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="font-data-value text-data-value text-primary">60%</span>
+<div class="w-16 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-outline-variant" style="width: 60%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md font-data-label text-[10px] uppercase tracking-wider font-semibold bg-gray-100 text-gray-800 border border-gray-200">
+                                                Contacted
+                                            </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">Today</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary-container hover:text-secondary transition-colors opacity-0 group-hover:opacity-100 font-medium">Follow Up</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container overflow-hidden">
+<img alt="Logo" class="w-full h-full object-cover" data-alt="Small crisp logo placeholder for a VPN service, sharp angles, dark primary color, secure shield motif, clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_qAJuv8_fdVnjMpa9DHgDumGRcj3_obsPpUyDvhMZtGlFD3MT4uWfXI6PuOPph2qlbJUSr9M6oFnog9GkoDeN2ahfZIErPwhzzJOETpsQUKu7lzD_Tq1PRWmVM27sgz0_nEejMrIhhzrkG5C-RntQ58XRCtAnb2YTaCeEX9s5jSy_Ecc1fyf6uKfbtFOQuMblUS1_bPV4amR4Ra7xOWiOhnuDv6UdzWKiwv2KQ5-us-iVSGiHNVJKNcITo2CMv11LBuv2MYuWe0I"/>
+</div>
+<span class="font-medium text-primary">NordVPN</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="font-data-value text-data-value text-primary">82%</span>
+<div class="w-16 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container" style="width: 82%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md font-data-label text-[10px] uppercase tracking-wider font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                                                Waiting
+                                            </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">5 days ago</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary-container hover:text-secondary transition-colors opacity-0 group-hover:opacity-100 font-medium">Nudge</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-outline-variant/30 flex justify-between items-center text-sm text-on-surface-variant">
+<span>Showing 4 of 24 deals</span>
+<div class="flex gap-1">
+<button class="p-1 hover:text-primary disabled:opacity-50"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Quick Actions FAB Stack (Bottom Right) -->
+<div class="fixed bottom-8 right-8 flex flex-col gap-3 z-30">
+<button class="glass-panel text-primary font-body-sm font-medium px-4 py-3 rounded-full shadow-lg hover:scale-[1.02] transition-transform duration-200 flex items-center gap-2 group">
+<span class="material-symbols-outlined text-secondary-container text-[20px] group-hover:animate-pulse">track_changes</span>
+                    Track Deal
+                </button>
+<button class="bg-primary text-on-primary font-body-sm font-medium px-4 py-3 rounded-full shadow-xl hover:scale-[1.02] transition-transform duration-200 flex items-center gap-2 hover:bg-black/90">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+                    Generate Email
+                </button>
+</div>
+</main>
+</div>
+</body></html>

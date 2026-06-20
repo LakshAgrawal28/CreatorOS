@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Content Studio | CreatorOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f3f3f3",
+                    "surface-container-high": "#e8e8e8",
+                    "tertiary-fixed-dim": "#c7c6c6",
+                    "on-primary-container": "#858383",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#c8c6c5",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#1b1c1c",
+                    "on-secondary-fixed-variant": "#753400",
+                    "background": "#f9f9f9",
+                    "on-background": "#1a1c1c",
+                    "on-secondary-fixed": "#321200",
+                    "on-tertiary-fixed-variant": "#464747",
+                    "on-primary-fixed": "#1c1b1b",
+                    "surface": "#f9f9f9",
+                    "on-tertiary-container": "#848484",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#fb7800",
+                    "tertiary-fixed": "#e4e2e2",
+                    "on-error": "#ffffff",
+                    "on-surface-variant": "#444748",
+                    "secondary": "#994700",
+                    "outline": "#747878",
+                    "surface-container-highest": "#e2e2e2",
+                    "secondary-fixed": "#ffdbc8",
+                    "on-surface": "#1a1c1c",
+                    "on-secondary-container": "#592600",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#1c1b1b",
+                    "tertiary": "#000000",
+                    "on-primary-fixed-variant": "#474646",
+                    "surface-variant": "#e2e2e2",
+                    "primary": "#000000",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container": "#eeeeee",
+                    "surface-dim": "#dadada",
+                    "secondary-fixed-dim": "#ffb68b",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#e5e2e1",
+                    "outline-variant": "#c4c7c7",
+                    "inverse-surface": "#2f3131",
+                    "surface-tint": "#5f5e5e",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#c8c6c5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "container-padding": "32px",
+                    "stack-md": "16px",
+                    "stack-sm": "8px",
+                    "max-width-content": "1200px",
+                    "stack-lg": "32px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "data-label": [
+                            "Space Grotesk"
+                    ],
+                    "data-value": [
+                            "Space Grotesk"
+                    ],
+                    "headline-lg-mobile": [
+                            "Sora"
+                    ],
+                    "headline-lg": [
+                            "Sora"
+                    ],
+                    "body-sm": [
+                            "Inter"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "display-lg": [
+                            "Sora"
+                    ]
+            },
+            "fontSize": {
+                    "data-label": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "data-value": [
+                            "18px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "36px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-sm": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+        },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #F6F6F6;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        /* Custom Scrollbar for a cleaner Notion-like feel */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e2e2e2;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c4c7c7;
+        }
+
+        .editor-content:empty:before {
+            content: attr(data-placeholder);
+            color: #848484;
+            pointer-events: none;
+            display: block; /* For Firefox */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md h-screen overflow-hidden flex">
+<!-- Mobile Top NavBar (hidden on md and up) -->
+<header class="md:hidden sticky top-0 z-50 flex justify-between items-center w-full px-container-padding h-16 bg-white/70 dark:bg-surface/70 backdrop-blur-xl border-b border-outline-variant/30 text-primary font-body-md text-body-md">
+<div class="flex items-center gap-2">
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold tracking-tight">CreatorOS</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-container-low transition-all duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-surface-container-low transition-all duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<!-- SideNavBar (Hidden on Mobile) -->
+<nav class="hidden md:flex fixed left-0 top-0 h-screen flex-col justify-between py-stack-lg z-40 bg-white/70 dark:bg-surface/70 backdrop-blur-xl border-r border-outline-variant/30 w-64">
+<div class="px-container-padding mb-stack-lg">
+<div class="flex items-center gap-3">
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold tracking-tight text-primary">CreatorOS</h1>
+<p class="font-data-label text-data-label text-on-surface-variant uppercase mt-1">Premium Suite</p>
+</div>
+</div>
+<button class="mt-stack-lg w-full bg-primary text-on-primary font-body-sm text-body-sm py-2 px-4 rounded-lg hover:scale-[0.98] transition-transform duration-200 flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Project
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto px-4">
+<ul class="space-y-unit">
+<li>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-highest transition-all duration-300 font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-highest transition-all duration-300 font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="trending_up">trending_up</span>
+<span>Trend Pulse</span>
+</a>
+</li>
+<li>
+<!-- ACTIVE STATE LOGIC -->
+<a class="text-primary font-bold border-l-4 border-secondary-container bg-surface-container-low/50 flex items-center gap-3 px-4 py-3 rounded-r-lg hover:bg-surface-container-highest transition-all duration-300 font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="edit_note" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+<span>Content Studio</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-highest transition-all duration-300 font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="analytics">analytics</span>
+<span>Analytics</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-highest transition-all duration-300 font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="handshake">handshake</span>
+<span>Sponsors</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-highest transition-all duration-300 font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="calendar_today">calendar_today</span>
+<span>Calendar</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-highest transition-all duration-300 font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="smart_toy">smart_toy</span>
+<span>AI Assistant</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-highest transition-all duration-300 font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span>Notifications</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 pt-stack-sm border-t border-outline-variant/30 mt-auto">
+<ul class="space-y-unit">
+<li>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-highest transition-all duration-300 font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="account_circle">account_circle</span>
+<span>Profile</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-highest transition-all duration-300 font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-container-highest transition-all duration-300 font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dark_mode">dark_mode</span>
+<span>Dark Mode</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col md:ml-64 h-full relative z-0 overflow-hidden bg-background">
+<!-- Workspace Header -->
+<div class="h-16 px-gutter flex items-center justify-between border-b border-outline-variant/30 bg-surface-container-lowest shrink-0">
+<div class="flex items-center gap-4">
+<h2 class="font-data-value text-data-value text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">folder_open</span>
+                    Q3 Campaign Kickoff
+                </h2>
+<span class="px-2 py-1 bg-surface-container-low rounded text-on-surface-variant font-data-label text-data-label uppercase tracking-wider">Draft</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-on-surface-variant font-body-sm text-body-sm mr-2 flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+                    Saved 2m ago
+                </span>
+<button class="px-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg text-primary hover:bg-surface-container-low transition-colors font-body-sm text-body-sm">
+                    Preview
+                </button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg hover:scale-[0.98] transition-transform duration-200 font-body-sm text-body-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">publish</span>
+                    Publish
+                </button>
+</div>
+</div>
+<!-- 3-Pane Split Layout -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Left Pane: Tools & Selectors (Collapsible on smaller screens) -->
+<aside class="w-72 bg-surface-container-lowest border-r border-outline-variant/30 flex flex-col overflow-y-auto shrink-0 hidden lg:flex">
+<div class="p-gutter space-y-stack-lg">
+<!-- Tool Selection -->
+<div>
+<h3 class="font-data-label text-data-label text-on-surface-variant uppercase mb-stack-sm">Active Tool</h3>
+<div class="space-y-unit">
+<button class="w-full flex items-center justify-between p-3 bg-surface-container-low border border-outline-variant/50 rounded-lg text-primary font-body-sm text-body-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-container">draw</span>
+<span class="font-medium">Script Writer</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">check</span>
+</button>
+<button class="w-full flex items-center gap-3 p-3 hover:bg-surface-container-low rounded-lg text-on-surface-variant font-body-sm text-body-sm transition-colors">
+<span class="material-symbols-outlined">format_quote</span>
+                                Hook Generator
+                            </button>
+<button class="w-full flex items-center gap-3 p-3 hover:bg-surface-container-low rounded-lg text-on-surface-variant font-body-sm text-body-sm transition-colors">
+<span class="material-symbols-outlined">subtitles</span>
+                                Caption Generator
+                            </button>
+<button class="w-full flex items-center gap-3 p-3 hover:bg-surface-container-low rounded-lg text-on-surface-variant font-body-sm text-body-sm transition-colors">
+<span class="material-symbols-outlined">tag</span>
+                                Hashtag Optimizer
+                            </button>
+</div>
+</div>
+<hr class="border-outline-variant/30"/>
+<!-- Parameters -->
+<div>
+<h3 class="font-data-label text-data-label text-on-surface-variant uppercase mb-stack-sm">Generation Parameters</h3>
+<div class="space-y-stack-md">
+<!-- Tone -->
+<div>
+<label class="block font-body-sm text-body-sm text-primary mb-2">Tone of Voice</label>
+<select class="w-full bg-surface-container-low border-transparent focus:border-primary focus:bg-surface-container-lowest focus:ring-0 rounded-lg text-body-sm font-body-sm text-primary p-2">
+<option>Authoritative &amp; Professional</option>
+<option>Casual &amp; Relatable</option>
+<option>Energetic &amp; Hype</option>
+<option>Educational &amp; Calm</option>
+</select>
+</div>
+<!-- Length -->
+<div>
+<label class="block font-body-sm text-body-sm text-primary mb-2">Target Length</label>
+<div class="flex gap-2">
+<button class="flex-1 py-1 px-2 text-center rounded border border-outline-variant text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low">Short</button>
+<button class="flex-1 py-1 px-2 text-center rounded border-primary bg-primary text-on-primary font-body-sm text-body-sm">Med</button>
+<button class="flex-1 py-1 px-2 text-center rounded border border-outline-variant text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low">Long</button>
+</div>
+</div>
+<!-- Platform -->
+<div>
+<label class="block font-body-sm text-body-sm text-primary mb-2">Primary Platform</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="flex items-center justify-center gap-2 py-2 px-2 rounded border border-primary bg-surface-container-low text-primary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">play_circle</span> Shorts
+                                    </button>
+<button class="flex items-center justify-center gap-2 py-2 px-2 rounded border border-outline-variant text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[16px]">image</span> Reels
+                                    </button>
+<button class="flex items-center justify-center gap-2 py-2 px-2 rounded border border-outline-variant text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[16px]">article</span> Post
+                                    </button>
+<button class="flex items-center justify-center gap-2 py-2 px-2 rounded border border-outline-variant text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[16px]">forum</span> Thread
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full bg-secondary-container text-primary font-body-sm text-body-sm py-3 px-4 rounded-lg hover:brightness-110 transition-all duration-200 font-medium flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">magic_button</span>
+                        Generate Draft
+                    </button>
+</div>
+</aside>
+<!-- Middle Pane: Live Editor -->
+<section class="flex-1 flex flex-col bg-surface-container-lowest relative overflow-hidden">
+<!-- Editor Toolbar -->
+<div class="h-12 border-b border-outline-variant/30 flex items-center justify-center gap-1 px-4 bg-white shrink-0">
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container-low rounded hover:text-primary transition-colors" title="Bold">
+<span class="material-symbols-outlined text-[20px]">format_bold</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container-low rounded hover:text-primary transition-colors" title="Italic">
+<span class="material-symbols-outlined text-[20px]">format_italic</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container-low rounded hover:text-primary transition-colors" title="Underline">
+<span class="material-symbols-outlined text-[20px]">format_underlined</span>
+</button>
+<div class="w-px h-5 bg-outline-variant/50 mx-2"></div>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container-low rounded hover:text-primary transition-colors" title="H1">
+<span class="material-symbols-outlined text-[20px]">format_h1</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container-low rounded hover:text-primary transition-colors" title="H2">
+<span class="material-symbols-outlined text-[20px]">format_h2</span>
+</button>
+<div class="w-px h-5 bg-outline-variant/50 mx-2"></div>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container-low rounded hover:text-primary transition-colors" title="Bullet List">
+<span class="material-symbols-outlined text-[20px]">format_list_bulleted</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container-low rounded hover:text-primary transition-colors" title="Numbered List">
+<span class="material-symbols-outlined text-[20px]">format_list_numbered</span>
+</button>
+<div class="w-px h-5 bg-outline-variant/50 mx-2"></div>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container-low rounded hover:text-primary transition-colors" title="Add Media">
+<span class="material-symbols-outlined text-[20px]">add_photo_alternate</span>
+</button>
+</div>
+<!-- Notion-like Canvas -->
+<div class="flex-1 overflow-y-auto px-gutter py-stack-lg max-w-3xl mx-auto w-full">
+<input class="w-full text-headline-lg font-headline-lg font-bold border-none bg-transparent focus:ring-0 p-0 mb-6 text-primary placeholder:text-surface-dim" placeholder="Untitled Draft" type="text" value="Mastering B2B SaaS Sales in 2024"/>
+<div class="editor-content outline-none font-body-md text-body-md text-on-background leading-relaxed min-h-[512px]" contenteditable="true" data-placeholder="Start typing or press '/' for commands...">
+<p class="mb-4">The landscape of B2B SaaS has shifted dramatically over the last 18 months. What worked in 2022 is now yielding diminishing returns, and sales teams are scrambling to adapt.</p>
+<p class="mb-4">Here is the core thesis: <strong class="text-primary">Buyers no longer want to be sold to; they want to be guided.</strong></p>
+<h2 class="text-data-value font-data-value text-primary mt-8 mb-4">1. The Death of the Cold Pitch</h2>
+<p class="mb-4">Generic outreach is dead. Inbox zero is a myth, and decision-makers are actively filtering out noise. If your opening line is "I noticed you're the VP of X...", you've already lost.</p>
+<div class="bg-surface-container-low border-l-4 border-secondary-container p-4 rounded-r-lg my-6">
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">"We need to inject a specific case study reference here. AI, suggest a relevant metric about open rates."</p>
+</div>
+<p class="mb-4">Instead, the focus must shift to value-led engagement. Share an insight they haven't seen. Highlight a problem they didn't realize they had.</p>
+</div>
+</div>
+<!-- AI Inline Prompt (Hidden by default, shown for UI demonstration) -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full max-w-lg px-4 hidden">
+<div class="glass-panel border border-outline-variant/50 rounded-xl p-2 flex items-center shadow-lg">
+<span class="material-symbols-outlined text-secondary-container ml-2">auto_awesome</span>
+<input class="flex-1 border-none bg-transparent focus:ring-0 font-body-sm text-body-sm text-primary placeholder:text-on-surface-variant ml-2" placeholder="Tell AI what to write next..." type="text"/>
+<button class="p-2 bg-primary text-on-primary rounded-lg hover:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Right Pane: AI Sidepanel (Suggestions) -->
+<aside class="w-80 bg-surface border-l border-outline-variant/30 flex flex-col shrink-0 overflow-hidden hidden xl:flex">
+<!-- Panel Header & Tabs -->
+<div class="bg-surface-container-lowest border-b border-outline-variant/30 shrink-0">
+<div class="p-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container">auto_awesome</span>
+<h3 class="font-data-value text-data-value text-primary">AI Suggestions</h3>
+</div>
+<!-- Scrollable Tabs -->
+<div class="flex overflow-x-auto hide-scrollbar px-2 pb-2 gap-1">
+<button class="px-3 py-1.5 bg-surface-container-low text-primary rounded-full font-body-sm text-body-sm whitespace-nowrap">Hooks</button>
+<button class="px-3 py-1.5 text-on-surface-variant hover:bg-surface-container-low rounded-full font-body-sm text-body-sm whitespace-nowrap transition-colors">Titles</button>
+<button class="px-3 py-1.5 text-on-surface-variant hover:bg-surface-container-low rounded-full font-body-sm text-body-sm whitespace-nowrap transition-colors">Captions</button>
+<button class="px-3 py-1.5 text-on-surface-variant hover:bg-surface-container-low rounded-full font-body-sm text-body-sm whitespace-nowrap transition-colors">Hashtags</button>
+<button class="px-3 py-1.5 text-on-surface-variant hover:bg-surface-container-low rounded-full font-body-sm text-body-sm whitespace-nowrap transition-colors">Thumbnails</button>
+</div>
+</div>
+<!-- Panel Content -->
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<div class="flex items-center justify-between mb-2">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase">Viral Hook Ideas</span>
+<button class="text-secondary-container hover:text-secondary transition-colors" title="Regenerate">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+</button>
+</div>
+<!-- Suggestion Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-xl p-4 hover:border-primary transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="px-2 py-0.5 bg-error-container text-on-error-container rounded text-[10px] font-bold uppercase tracking-wider">High Conviction</span>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
+<button class="p-1 text-on-surface-variant hover:text-primary bg-surface rounded"><span class="material-symbols-outlined text-[16px]">content_copy</span></button>
+<button class="p-1 text-on-surface-variant hover:text-primary bg-surface rounded"><span class="material-symbols-outlined text-[16px]">add</span></button>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-primary">"Stop sending cold emails in 2024. Do this instead if you want to close B2B deals."</p>
+</div>
+<!-- Suggestion Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-xl p-4 hover:border-primary transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface rounded text-[10px] font-bold uppercase tracking-wider">Curiosity Gap</span>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
+<button class="p-1 text-on-surface-variant hover:text-primary bg-surface rounded"><span class="material-symbols-outlined text-[16px]">content_copy</span></button>
+<button class="p-1 text-on-surface-variant hover:text-primary bg-surface rounded"><span class="material-symbols-outlined text-[16px]">add</span></button>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-primary">"I analyzed 10,000 SaaS sales calls. The top 1% reps all do this one weird thing..."</p>
+</div>
+<!-- Suggestion Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-xl p-4 hover:border-primary transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface rounded text-[10px] font-bold uppercase tracking-wider">Contrarian</span>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
+<button class="p-1 text-on-surface-variant hover:text-primary bg-surface rounded"><span class="material-symbols-outlined text-[16px]">content_copy</span></button>
+<button class="p-1 text-on-surface-variant hover:text-primary bg-surface rounded"><span class="material-symbols-outlined text-[16px]">add</span></button>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-primary">"Your VP of Sales is lying to you about quota. Here is the math they don't want you to see."</p>
+</div>
+<div class="mt-8 pt-4 border-t border-outline-variant/30">
+<div class="flex items-center justify-between mb-4">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase">Tone Analysis</span>
+</div>
+<div class="space-y-3">
+<div>
+<div class="flex justify-between text-body-sm font-body-sm mb-1">
+<span class="text-on-surface-variant">Readability</span>
+<span class="text-primary font-medium">8th Grade</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-body-sm font-body-sm mb-1">
+<span class="text-on-surface-variant">Engagement</span>
+<span class="text-secondary-container font-medium">High</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5">
+<div class="bg-secondary-container h-1.5 rounded-full" style="width: 90%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- BottomNavBar (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-between items-center px-6 py-2 bg-white/70 dark:bg-surface/70 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] border-t border-outline-variant/30 pb-safe">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors p-2" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="dashboard">dashboard</span>
+<span class="font-data-label text-[10px] uppercase tracking-wider">Home</span>
+</a>
+<!-- Active Tab Mobile -->
+<a class="flex flex-col items-center gap-1 text-primary p-2" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="edit_note" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+<span class="font-data-label text-[10px] uppercase tracking-wider font-bold">Studio</span>
+</a>
+<!-- Center FAB alternative for mobile nav -->
+<div class="relative -top-5">
+<button class="bg-secondary-container text-primary p-4 rounded-full shadow-lg hover:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[24px]">magic_button</span>
+</button>
+</div>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors p-2" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="analytics">analytics</span>
+<span class="font-data-label text-[10px] uppercase tracking-wider">Data</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors p-2" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="account_circle">account_circle</span>
+<span class="font-data-label text-[10px] uppercase tracking-wider">Profile</span>
+</a>
+</nav>
+<style>
+        /* Hide scrollbar for horizontal scrolling tabs */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Mobile safe area padding for modern devices */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .pb-safe {
+                padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</body></html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CreatorOS Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&amp;family=Sora:wght@700&amp;family=Inter:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container-high": "#e8e8e8",
+                        "tertiary-fixed-dim": "#c7c6c6",
+                        "on-primary-container": "#858383",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#c8c6c5",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#1b1c1c",
+                        "on-secondary-fixed-variant": "#753400",
+                        "background": "#f9f9f9",
+                        "on-background": "#1a1c1c",
+                        "on-secondary-fixed": "#321200",
+                        "on-tertiary-fixed-variant": "#464747",
+                        "on-primary-fixed": "#1c1b1b",
+                        "surface": "#f9f9f9",
+                        "on-tertiary-container": "#848484",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#fb7800",
+                        "tertiary-fixed": "#e4e2e2",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#444748",
+                        "secondary": "#994700",
+                        "outline": "#747878",
+                        "surface-container-highest": "#e2e2e2",
+                        "secondary-fixed": "#ffdbc8",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary-container": "#592600",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#1c1b1b",
+                        "tertiary": "#000000",
+                        "on-primary-fixed-variant": "#474646",
+                        "surface-variant": "#e2e2e2",
+                        "primary": "#000000",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container": "#eeeeee",
+                        "surface-dim": "#dadada",
+                        "secondary-fixed-dim": "#ffb68b",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f1f1f1",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#e5e2e1",
+                        "outline-variant": "#c4c7c7",
+                        "inverse-surface": "#2f3131",
+                        "surface-tint": "#5f5e5e",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#c8c6c5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "container-padding": "32px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "max-width-content": "1200px",
+                        "stack-lg": "32px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "data-label": ["Space Grotesk"],
+                        "data-value": ["Space Grotesk"],
+                        "headline-lg-mobile": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Sora"]
+                    },
+                    "fontSize": {
+                        "data-label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "data-value": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .card-shadow {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex selection:bg-secondary-container selection:text-white">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 flex flex-col justify-between py-stack-lg z-40 bg-white/70 backdrop-blur-xl border-r border-outline-variant/30 hidden md:flex">
+<div class="px-6 flex flex-col gap-stack-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">hexagon</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-[20px] leading-tight font-bold tracking-tight text-primary">CreatorOS</h1>
+<p class="font-data-label text-data-label text-on-surface-variant uppercase">Premium Suite</p>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary rounded-xl py-3 px-4 font-data-label text-data-label flex items-center justify-center gap-2 hover:scale-[0.98] transition-transform duration-200">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Project
+            </button>
+<nav class="flex flex-col gap-1">
+<a class="text-primary font-bold border-l-4 border-secondary-container bg-surface-container-low/50 flex items-center gap-3 px-4 py-3 rounded-r-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-data-label text-data-label">Dashboard</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-surface-container-high/40 transition-all duration-300 rounded-r-lg" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-data-label text-data-label">Trend Pulse</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-surface-container-high/40 transition-all duration-300 rounded-r-lg" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-data-label text-data-label">Content Studio</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-surface-container-high/40 transition-all duration-300 rounded-r-lg" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-data-label text-data-label">Analytics</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-surface-container-high/40 transition-all duration-300 rounded-r-lg" href="#">
+<span class="material-symbols-outlined">handshake</span>
+<span class="font-data-label text-data-label">Sponsors</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-surface-container-high/40 transition-all duration-300 rounded-r-lg" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-data-label text-data-label">Calendar</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-surface-container-high/40 transition-all duration-300 rounded-r-lg" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-data-label text-data-label">AI Assistant</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-surface-container-high/40 transition-all duration-300 rounded-r-lg" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-data-label text-data-label">Notifications</span>
+</a>
+</nav>
+</div>
+<div class="px-6">
+<nav class="flex flex-col gap-1 border-t border-outline-variant/30 pt-4">
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-surface-container-high/40 transition-all duration-300 rounded-r-lg" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-data-label text-data-label">Profile</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-surface-container-high/40 transition-all duration-300 rounded-r-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-data-label text-data-label">Settings</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-surface-container-high/40 transition-all duration-300 rounded-r-lg" href="#">
+<span class="material-symbols-outlined">dark_mode</span>
+<span class="font-data-label text-data-label">Dark Mode</span>
+</a>
+</nav>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-container-padding h-16 bg-white/70 backdrop-blur-xl border-b border-outline-variant/30 hidden md:flex">
+<div class="flex items-center gap-8">
+<!-- Mobile Logo (hidden on desktop since sidebar has it, but JSON implies it might be here if standalone. Leaving out to match standard dashboard flow, relying on search) -->
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="bg-surface-container-low border-none rounded-xl pl-10 pr-4 py-2 font-body-sm text-body-sm focus:ring-1 focus:ring-primary focus:bg-white w-64 transition-all duration-200" placeholder="Search CreatorOS..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<nav class="flex items-center gap-6 hidden lg:flex">
+<a class="text-primary border-b-2 border-secondary-container py-5 font-data-label text-data-label hover:bg-surface-container-low transition-all duration-200 px-2" href="#">Dashboard</a>
+<a class="text-on-surface-variant py-5 font-data-label text-data-label hover:bg-surface-container-low transition-all duration-200 px-2" href="#">Analytics</a>
+</nav>
+<div class="h-6 w-px bg-outline-variant/50 hidden lg:block"></div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-all duration-200 active:scale-[0.98]">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-all duration-200 active:scale-[0.98]">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="w-9 h-9 rounded-full ml-2 overflow-hidden border border-outline-variant/30 active:scale-[0.98] transition-transform">
+<img class="w-full h-full object-cover" data-alt="A close up, high resolution portrait of a confident, diverse young creative professional looking directly at the camera. The lighting is soft and natural, emphasizing a modern, clean aesthetic. The background is a slightly blurred, high-end studio environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9XcHjYvk5tM9oy5v6J_1jOEqur0mvmrDcAQIa63J7Av6o3UNLrEmrggKYtaOXJde4CUq0sP5PknJbuo9ImhmQGiwZt2f_3-RUyQ4dWjuq_EId7Juxsxf1u8mPAhACrlGT2NQHnkyFWdYaSqHhEPnyPdbNVQaNAc4Wy7eCGr5sVuBN_hIgBTwZPpdCY3MnsNMiHyx7wUH-8VnsY3DAP0b0MWOOD-Zxnv3MzalQ8xZSGsvKJXaqEnwtQEPf7-6iwnRTB4kx2acw1Og"/>
+</button>
+</div>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<div class="p-container-padding max-w-[1200px] mx-auto w-full flex-1 flex flex-col gap-stack-lg">
+<!-- Header Section -->
+<section class="flex flex-col gap-stack-sm md:flex-row md:items-end justify-between">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Good Evening, Creator 👋</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Here is your performance snapshot for today.</p>
+</div>
+<div class="flex flex-wrap gap-2 mt-4 md:mt-0">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-xl font-data-label text-data-label hover:scale-[0.98] transition-transform duration-200">Generate Script</button>
+<button class="bg-transparent border border-outline-variant text-primary px-4 py-2 rounded-xl font-data-label text-data-label hover:bg-surface-container-low transition-colors duration-200">Write Caption</button>
+<button class="bg-transparent border border-outline-variant text-primary px-4 py-2 rounded-xl font-data-label text-data-label hover:bg-surface-container-low transition-colors duration-200">View Trends</button>
+</div>
+</section>
+<!-- Main Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Trend Score -->
+<div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-[24px] flex flex-col justify-between card-shadow">
+<div class="flex justify-between items-start">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase">Trend Score</span>
+<span class="material-symbols-outlined text-secondary-container">local_fire_department</span>
+</div>
+<div class="mt-4">
+<div class="font-data-value text-[32px] leading-tight font-bold text-primary">94.2</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1 flex items-center gap-1 text-green-700">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span> 12% vs last week
+                        </div>
+</div>
+</div>
+<!-- Follower Growth -->
+<div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-[24px] flex flex-col justify-between card-shadow">
+<div class="flex justify-between items-start">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase">Follower Growth</span>
+<span class="material-symbols-outlined text-on-surface-variant">group_add</span>
+</div>
+<div class="mt-4">
+<div class="font-data-value text-[32px] leading-tight font-bold text-primary">+2.4k</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1 flex items-center gap-1 text-green-700">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span> 4.1% MoM
+                        </div>
+</div>
+</div>
+<!-- Engagement Rate -->
+<div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-[24px] flex flex-col justify-between card-shadow">
+<div class="flex justify-between items-start">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase">Engagement Rate</span>
+<span class="material-symbols-outlined text-on-surface-variant">favorite</span>
+</div>
+<div class="mt-4 flex items-end justify-between">
+<div>
+<div class="font-data-value text-[32px] leading-tight font-bold text-primary">8.7%</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Across all platforms</div>
+</div>
+<div class="w-12 h-12 rounded-full border-4 border-surface-container-high border-t-secondary-container"></div>
+</div>
+</div>
+<!-- Brand Opportunities -->
+<div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-[24px] flex flex-col justify-between card-shadow bg-gradient-to-br from-white to-orange-50/30">
+<div class="flex justify-between items-start">
+<span class="font-data-label text-data-label text-secondary-container uppercase">Brand Opps</span>
+<span class="material-symbols-outlined text-secondary-container">campaign</span>
+</div>
+<div class="mt-4">
+<div class="font-data-value text-[32px] leading-tight font-bold text-primary">3</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Pending proposals</div>
+</div>
+<button class="mt-4 w-full bg-surface-container-low text-primary py-2 rounded-lg font-data-label text-data-label hover:bg-surface-variant transition-colors">Review</button>
+</div>
+<!-- Weekly Analytics Graph (Wide) -->
+<div class="col-span-1 lg:col-span-3 bg-surface-container-lowest border border-surface-variant rounded-xl p-[24px] card-shadow flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-data-value text-data-value text-primary">Weekly Performance</h3>
+<div class="flex gap-2">
+<span class="px-2 py-1 rounded bg-secondary-container/10 text-secondary-container font-data-label text-[10px] uppercase">Views</span>
+<span class="px-2 py-1 rounded bg-surface-container text-on-surface-variant font-data-label text-[10px] uppercase">Likes</span>
+</div>
+</div>
+<div class="flex-1 w-full h-48 relative border-b border-l border-outline-variant/20">
+<!-- Simulated Graph using decorative SVG for aesthetic -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,80 Q10,70 20,85 T40,60 T60,75 T80,30 T100,40" fill="none" stroke="#fb7800" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+<path d="M0,80 Q10,70 20,85 T40,60 T60,75 T80,30 T100,40 L100,100 L0,100 Z" fill="url(#orange-grad)" opacity="0.1"></path>
+<defs>
+<lineargradient id="orange-grad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#fb7800"></stop>
+<stop offset="100%" stop-color="#ffffff" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</div>
+<!-- Best Posting Time -->
+<div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-[24px] card-shadow flex flex-col">
+<h3 class="font-data-value text-data-value text-primary mb-4">Best Times</h3>
+<div class="grid grid-cols-4 gap-2 flex-1">
+<!-- Heatmap mock -->
+<div class="bg-surface-container-low rounded flex items-center justify-center font-data-label text-[10px] text-on-surface-variant">9a</div>
+<div class="bg-secondary-container/20 rounded flex items-center justify-center font-data-label text-[10px] text-secondary-container">12p</div>
+<div class="bg-surface-container-low rounded flex items-center justify-center font-data-label text-[10px] text-on-surface-variant">3p</div>
+<div class="bg-secondary-container/80 rounded flex items-center justify-center font-data-label text-[10px] text-white">6p</div>
+<div class="bg-surface-container-low rounded flex items-center justify-center font-data-label text-[10px] text-on-surface-variant">Mon</div>
+<div class="bg-secondary-container/40 rounded flex items-center justify-center font-data-label text-[10px] text-secondary-container">Tue</div>
+<div class="bg-surface-container-low rounded flex items-center justify-center font-data-label text-[10px] text-on-surface-variant">Wed</div>
+<div class="bg-secondary-container/60 rounded flex items-center justify-center font-data-label text-[10px] text-white">Thu</div>
+<div class="bg-surface-container-low rounded flex items-center justify-center font-data-label text-[10px] text-on-surface-variant">Fri</div>
+<div class="bg-secondary-container/90 rounded flex items-center justify-center font-data-label text-[10px] text-white">Sat</div>
+<div class="bg-secondary-container/70 rounded flex items-center justify-center font-data-label text-[10px] text-white">Sun</div>
+<div class="bg-surface-container-low rounded flex items-center justify-center font-data-label text-[10px] text-on-surface-variant">-</div>
+</div>
+</div>
+<!-- Top Performing Reel -->
+<div class="col-span-1 lg:col-span-2 bg-surface-container-lowest border border-surface-variant rounded-xl p-[24px] card-shadow flex gap-6">
+<div class="w-32 h-40 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-low relative">
+<img class="w-full h-full object-cover" data-alt="A vibrant, vertical thumbnail image for a social media reel. The image shows a dynamic, well-lit scene of a creator pointing enthusiastically at a floating holographic text element. The aesthetic is modern, bright, and highly engaging with a slight blur in the background to make the subject pop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG9LB9WcgQBcozN4rEPrT8iprJ8hvMu6PCdo7xdlTtiOWHSUXAKiIsu5Ai90DugHpFVuhDHHVjgFaCpPc1yqW0j4LxKkdfuBzBYNzwoTZ9J-bOdohsGMwh1vyHriZoYzC0rDstZVjIR7jAU2bQ6MXKfjnLZ5NOUYTjjfkFGAQFIBdSE-zsXCp32lw875nfIj15iDlQZrp3c8iFvfrP9LSQ37z9vWVbHZVZR3IIRuEHJgeCGMlOUvAgm3PGeHVOIhE5Qf94oWJYXiI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-2">
+<span class="material-symbols-outlined text-white text-[16px]">play_arrow</span>
+</div>
+</div>
+<div class="flex flex-col justify-center flex-1">
+<span class="font-data-label text-data-label text-secondary-container uppercase mb-1">Top Reel</span>
+<h4 class="font-data-value text-[20px] leading-tight text-primary mb-2">My Top 5 Design Tools in 2024</h4>
+<div class="flex items-center gap-4 mt-2">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="font-data-label text-data-label">1.2M</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">favorite</span>
+<span class="font-data-label text-data-label">84K</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity List -->
+<div class="col-span-1 lg:col-span-2 bg-surface-container-lowest border border-surface-variant rounded-xl p-[24px] card-shadow">
+<h3 class="font-data-value text-data-value text-primary mb-4">Upcoming Posts</h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">image</span>
+</div>
+<div>
+<div class="font-body-sm font-semibold text-primary">Setup Tour Reel</div>
+<div class="font-data-label text-data-label text-on-surface-variant">Instagram • Today, 6:00 PM</div>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">article</span>
+</div>
+<div>
+<div class="font-body-sm font-semibold text-primary">Q3 Review Thread</div>
+<div class="font-data-label text-data-label text-on-surface-variant">X/Twitter • Tomorrow, 9:00 AM</div>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

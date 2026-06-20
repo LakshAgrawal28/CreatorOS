@@ -1,0 +1,226 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider  = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  CREATOR
+  SPONSOR
+  ADMIN
+}
+
+enum CampaignStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  COMPLETED
+}
+
+enum ApplicationStatus {
+  APPLIED
+  CONTACTED
+  NEGOTIATING
+  APPROVED
+  REJECTED
+  WAITING
+}
+
+enum TransactionStatus {
+  ESCROW_LOCKED
+  DELIVERED_PENDING_APPROVAL
+  RELEASED
+  REFUNDED
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  name          String?
+  role          Role      @default(CREATOR)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Authentication relation (NextAuth / Clerk)
+  accounts      Account[]
+  sessions      Session[]
+
+  // Profiles
+  creatorProfile CreatorProfile?
+  sponsorProfile SponsorProfile?
+
+  // Messages
+  sentMessages     Message[] @relation("SentMessages")
+  receivedMessages Message[] @relation("ReceivedMessages")
+}
+
+model Account {
+  id                 String   @id @default(uuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model CreatorProfile {
+  id               String   @id @default(uuid())
+  userId           String   @unique
+  instagramHandle  String   @unique
+  bio              String?  @db.Text
+  niche            String   // e.g., "Tech & Gadgets", "Lifestyle"
+  
+  // Real-time statistics fetched from Instagram Graph API
+  followerCount    Int      @default(0)
+  engagementRate   Float    @default(0.0) // E.g., 8.7% -> 0.087
+  averageViews     Int      @default(0)
+  averageLikes     Int      @default(0)
+  audienceDemo     Json?    // Demographics breakdown (age, gender, countries)
+  
+  // Semantic Vector Embedding for AI Matching (stored using pgvector)
+  profileEmbedding Unsupported("vector(1536)")?
+
+  // Integrations & Payments
+  razorpayRouteId  String?  // Razorpay Route Linked Merchant Account ID for creator payouts
+  metaAccessToken  String?  // Long-lived access token for Instagram Page
+
+  // Relations
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  applications Application[]
+  contentItems ContentItem[]
+  matches      Match[]
+}
+
+model SponsorProfile {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  companyName String
+  industry    String
+  website     String
+  logoUrl     String?
+
+  // Relations
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  campaigns Campaign[]
+}
+
+model Campaign {
+  id             String         @id @default(uuid())
+  sponsorId      String
+  title          String
+  description    String         @db.Text
+  industry       String         // Target industry niche
+  budget         Float          // Total campaign budget in USD
+  creatorCriteria Json          // JSON object representing follower ranges, locations
+  deliverables   String[]       // e.g., ["Reel", "Story"]
+  status         CampaignStatus @default(DRAFT)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  // Semantic Vector Embedding for Campaign Criteria
+  campaignEmbedding Unsupported("vector(1536)")?
+
+  // Relations
+  sponsor      SponsorProfile @relation(fields: [sponsorId], references: [id], onDelete: Cascade)
+  applications Application[]
+  matches      Match[]
+}
+
+model Match {
+  id               String   @id @default(uuid())
+  creatorProfileId String
+  campaignId       String
+  matchScore       Float    // Match Score (0.0 to 1.0)
+  createdAt        DateTime @default(now())
+
+  // Relations
+  creator CreatorProfile @relation(fields: [creatorProfileId], references: [id], onDelete: Cascade)
+  campaign Campaign       @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@unique([creatorProfileId, campaignId])
+}
+
+model Application {
+  id               String            @id @default(uuid())
+  campaignId       String
+  creatorProfileId String
+  status           ApplicationStatus @default(APPLIED)
+  appliedAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  
+  // Escrow Relation
+  transaction      EscrowTransaction?
+
+  // Relations
+  campaign Campaign       @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  creator  CreatorProfile @relation(fields: [creatorProfileId], references: [id], onDelete: Cascade)
+
+  @@unique([campaignId, creatorProfileId])
+}
+
+model ContentItem {
+  id               String      @id @default(uuid())
+  creatorProfileId String
+  title            String
+  platform         String      // e.g., "Instagram", "YouTube"
+  format           String      // e.g., "Reel", "Post", "Thread"
+  status           String      // "Idea" | "Production" | "Review" | "Scheduled"
+  scheduledAt      DateTime?
+  mediaUrl         String?     // Link to draft / published asset
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  // Relations
+  creator CreatorProfile @relation(fields: [creatorProfileId], references: [id], onDelete: Cascade)
+}
+
+model Message {
+  id          String   @id @default(uuid())
+  senderId    String
+  receiverId  String
+  content     String   @db.Text
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  // Relations
+  sender   User @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+}
+
+model EscrowTransaction {
+  id                 String            @id @default(uuid())
+  applicationId      String            @unique
+  razorpayOrderId    String            // Razorpay Order ID for tracking the escrow
+  razorpayPaymentId  String?           // Razorpay Payment ID captured
+  razorpayTransferId String?           // Razorpay Route Transfer ID
+  escrowStatus       TransactionStatus @default(ESCROW_LOCKED)
+  amount             Float
+  releasedAt         DateTime?
+  createdAt          DateTime          @default(now())
+
+  // Relations
+  application Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}
