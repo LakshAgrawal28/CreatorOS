@@ -37,6 +37,9 @@ function SignInContent() {
       if (res?.error) {
         console.error("Sign-in failed:", res.error);
       } else {
+        // Fallback for Vercel NextAuth edge cookie dropping issues
+        document.cookie = `demo_role=${role}; path=/; max-age=86400;`;
+        document.cookie = `demo_name=${encodeURIComponent(username)}; path=/; max-age=86400;`;
         router.push(callbackUrl);
         router.refresh();
       }

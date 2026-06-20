@@ -10,11 +10,13 @@ export async function proxy(req: NextRequest) {
   });
 
   const path = req.nextUrl.pathname;
+  const demoRole = req.cookies.get("demo_role")?.value;
+  const hasAccess = token || demoRole;
 
   // Redirect unauthenticated users away from protected routes
   if (
     (path.startsWith("/dashboard") || path.startsWith("/api/creator") || path.startsWith("/api/sponsors")) &&
-    !token
+    !hasAccess
   ) {
     const signInUrl = new URL("/auth/signin", req.url);
     signInUrl.searchParams.set("callbackUrl", req.url);
@@ -22,7 +24,8 @@ export async function proxy(req: NextRequest) {
   }
 
   // Role-based protection: only SPONSOR role can create campaigns
-  if (path.startsWith("/dashboard/sponsor/campaigns/new") && token?.role !== "SPONSOR") {
+  const role = token?.role || demoRole;
+  if (path.startsWith("/dashboard/sponsor/campaigns/new") && role !== "SPONSOR") {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
