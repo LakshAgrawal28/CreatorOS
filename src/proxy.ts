@@ -6,7 +6,7 @@ import type { NextRequest } from "next/server";
 export async function proxy(req: NextRequest) {
   const token = await getToken({
     req,
-    secret: process.env.NEXTAUTH_SECRET || "creatoros_nextauth_dev_secret_do_not_use_in_prod_abc123xyz",
+    secret: process.env.NEXTAUTH_SECRET || "creatoros_nextauth_dev_secret_123456789",
   });
 
   const path = req.nextUrl.pathname;
