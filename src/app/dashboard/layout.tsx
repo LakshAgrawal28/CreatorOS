@@ -16,8 +16,9 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
   if (!session || !session.user) {
     // Fallback for Vercel NextAuth edge cookie dropping
     const { cookies } = await import("next/headers");
-    const demoRole = cookies().get("demo_role")?.value;
-    const demoName = cookies().get("demo_name")?.value;
+    const cookieStore = await cookies();
+    const demoRole = cookieStore.get("demo_role")?.value;
+    const demoName = cookieStore.get("demo_name")?.value;
     
     if (demoRole) {
       session = {

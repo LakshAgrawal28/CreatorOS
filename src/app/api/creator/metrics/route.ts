@@ -20,9 +20,8 @@ export async function GET(req: NextRequest) {
       }
     }
 
-  const userId = (session.user as any).id;
+    const userId = (session.user as any).id;
 
-  try {
     const creatorProfile = await db.creatorProfile.findUnique({
       where: { userId },
       select: {
