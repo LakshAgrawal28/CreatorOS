@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(geminiApiKey);
 
 /**
  * Generates an embedding vector (768 dimensions) from the provided text using
- * Google Gemini's text-embedding-004 model, and pads it with zeros to match
+ * Google Gemini's gemini-embedding-2 model, and pads or slices it to match
  * the 1536 dimensions expected by pgvector in the database schema.
  */
 export async function getEmbedding(text: string): Promise<number[]> {
@@ -15,7 +15,7 @@ export async function getEmbedding(text: string): Promise<number[]> {
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: "text-embedding-004" });
+    const model = genAI.getGenerativeModel({ model: "gemini-embedding-2" });
     const result = await model.embedContent(text);
     
     if (!result.embedding || !result.embedding.values) {

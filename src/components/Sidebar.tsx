@@ -17,6 +17,7 @@ export default function Sidebar({ userName, role, instagramHandle }: SidebarProp
     { name: "Dashboard", href: "/dashboard", icon: "dashboard" },
     { name: "Trend Pulse", href: "/dashboard/trends", icon: "trending_up" },
     { name: "Content Studio", href: "/dashboard/creator/studio", icon: "edit_note" },
+    { name: "Brand Matches", href: "/dashboard/sponsor/matches", icon: "handshake" },
     { name: "Analytics", href: "/dashboard/analytics", icon: "analytics" },
     { name: "Calendar", href: "/dashboard/creator/calendar", icon: "calendar_today" },
     { name: "AI Assistant", href: "/dashboard/assistant", icon: "smart_toy" },

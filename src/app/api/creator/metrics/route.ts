@@ -13,8 +13,15 @@ export async function GET(req: NextRequest) {
 
     if (!session || !session.user) {
       const demoRole = req.cookies.get("demo_role")?.value;
-      if (demoRole) {
-        session = { user: { id: "guest-user-id", role: demoRole } };
+      const demoName = req.cookies.get("demo_name")?.value;
+      if (demoRole && demoName) {
+        const email = `${decodeURIComponent(demoName).toLowerCase().replace(/[^a-z0-9_]/g, "")}@creatoros.com`;
+        const dbUser = await db.user.findUnique({ where: { email } });
+        if (dbUser) {
+          session = { user: { id: dbUser.id, role: dbUser.role } };
+        } else {
+          return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
       } else {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
       }

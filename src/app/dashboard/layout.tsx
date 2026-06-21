@@ -5,6 +5,7 @@ import { authOptions } from "@/server/auth";
 import Link from "next/link";
 import { db } from "@/server/db";
 import Sidebar from "@/components/Sidebar";
+import RoleSwitcher from "@/components/RoleSwitcher";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -19,11 +20,58 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
     const cookieStore = await cookies();
     const demoRole = cookieStore.get("demo_role")?.value;
     const demoName = cookieStore.get("demo_name")?.value;
-    
-    if (demoRole) {
-      session = {
-        user: { id: "guest-user-id", name: decodeURIComponent(demoName || "Guest"), email: "guest@creatoros.com", role: demoRole }
-      };
+
+    if (demoRole && demoName) {
+      const rawName = decodeURIComponent(demoName);
+      const cleanName = rawName.replace(/[^a-zA-Z0-9_]/g, "");
+      const email = `${cleanName.toLowerCase()}@creatoros.com`;
+
+      let dbUser = await db.user.findUnique({ where: { email } });
+
+      // If user doesn't exist (e.g., after role switch), create them
+      if (!dbUser) {
+        const role = demoRole.toUpperCase() === "SPONSOR" ? "SPONSOR" : "CREATOR";
+        try {
+          dbUser = await db.user.create({
+            data: { email, name: rawName, role: role as any },
+          });
+
+          // Create role-specific profile
+          if (role === "CREATOR") {
+            await db.creatorProfile.create({
+              data: {
+                userId: dbUser.id,
+                instagramHandle: cleanName.toLowerCase(),
+                bio: "Creative storyteller and content creator based in India.",
+                niche: "Tech & Gadgets",
+                followerCount: 4250,
+                engagementRate: 0.087,
+                averageViews: 1420,
+                averageLikes: 356,
+              }
+            });
+          } else {
+            await db.sponsorProfile.create({
+              data: {
+                userId: dbUser.id,
+                companyName: rawName,
+                industry: "Tech & Gadgets",
+                website: "https://example.com",
+              }
+            });
+          }
+        } catch {
+          redirect("/auth/signin");
+        }
+      }
+
+      if (dbUser) {
+        session = {
+          user: { id: dbUser.id, name: dbUser.name, email: dbUser.email, role: dbUser.role }
+        };
+      } else {
+        redirect("/auth/signin");
+      }
     } else {
       redirect("/auth/signin");
     }
@@ -77,10 +125,7 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
             </button>
 
             {/* Quick Portal Switch Badge */}
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-surface-variant bg-surface/50 text-[12px] font-semibold text-primary">
-              <span className="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
-              <span className="capitalize">{role.toLowerCase()} Mode</span>
-            </div>
+            <RoleSwitcher role={role} />
           </div>
         </header>
 

@@ -24,10 +24,19 @@ interface Campaign {
 }
 
 export default function MatchesCRMPage() {
-  const [role, setRole] = useState<"CREATOR" | "SPONSOR">("SPONSOR");
+  // Immediately read role from demo_role cookie to avoid SPONSOR flash for CREATOR users
+  const getCookieRole = (): "CREATOR" | "SPONSOR" => {
+    if (typeof document === "undefined") return "SPONSOR";
+    const cookie = document.cookie.split(";").find((c) => c.trim().startsWith("demo_role="));
+    const val = cookie?.split("=")?.[1]?.trim();
+    return val === "CREATOR" ? "CREATOR" : "SPONSOR";
+  };
+
+  const [role, setRole] = useState<"CREATOR" | "SPONSOR">(getCookieRole);
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [selectedCampaignId, setSelectedCampaignId] = useState<string>("");
   const [matches, setMatches] = useState<CreatorMatch[]>([]);
+  const [creatorBrands, setCreatorBrands] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
@@ -147,6 +156,27 @@ export default function MatchesCRMPage() {
     loadInitialData();
   }, []);
 
+  // Fetch creator matches based on profile embedding (For Creator View)
+  useEffect(() => {
+    if (role !== "CREATOR") return;
+    async function loadCreatorMatches() {
+      try {
+        const res = await fetch("/api/creator/matches");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.matches && data.matches.length > 0) {
+            setCreatorBrands(data.matches);
+            return;
+          }
+        }
+        setCreatorBrands(creatorBrandMatches);
+      } catch (err) {
+        setCreatorBrands(creatorBrandMatches);
+      }
+    }
+    loadCreatorMatches();
+  }, [role]);
+
   // Fetch creator matches based on selected campaign (For Sponsor View)
   useEffect(() => {
     if (!selectedCampaignId || role !== "SPONSOR") return;
@@ -256,7 +286,7 @@ export default function MatchesCRMPage() {
 
             {/* Horizontal Scroll List */}
             <div className="flex gap-6 overflow-x-auto pb-4 no-scrollbar -mx-6 px-6">
-              {creatorBrandMatches.map((brand) => (
+              {(creatorBrands.length > 0 ? creatorBrands : creatorBrandMatches).map((brand) => (
                 <div key={brand.id} className="bg-white border border-[#E5E5E5] rounded-[20px] p-6 min-w-[280px] flex-shrink-0 hover:shadow-[0_4px_25px_rgba(0,0,0,0.015)] transition-shadow flex flex-col justify-between gap-6 shadow-[0_4px_30px_rgba(0,0,0,0.02)]">
                   <div className="flex justify-between items-start">
                     <div className="flex items-center gap-3">

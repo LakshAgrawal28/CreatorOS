@@ -17,10 +17,18 @@ export default async function DashboardPage() {
     const demoRole = cookieStore.get("demo_role")?.value;
     const demoName = cookieStore.get("demo_name")?.value;
     
-    if (demoRole) {
-      session = {
-        user: { id: "guest-user-id", name: decodeURIComponent(demoName || "Guest"), email: "guest@creatoros.com", role: demoRole }
-      };
+    if (demoRole && demoName) {
+      const email = `${decodeURIComponent(demoName).toLowerCase().replace(/[^a-z0-9_]/g, "")}@creatoros.com`;
+      const dbUser = await db.user.findUnique({
+        where: { email },
+      });
+      if (dbUser) {
+        session = {
+          user: { id: dbUser.id, name: dbUser.name, email: dbUser.email, role: dbUser.role }
+        };
+      } else {
+        redirect("/auth/signin");
+      }
     } else {
       redirect("/auth/signin");
     }
@@ -29,6 +37,10 @@ export default async function DashboardPage() {
   const user = session.user as any;
   const role = user.role || "CREATOR";
   const userName = user.name || "User";
+
+  // Generate a dynamic greeting based on server time
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? "Good Morning" : hour < 17 ? "Good Afternoon" : "Good Evening";
 
   // Attempt to fetch creator specific records from database
   let creatorProfile = null;
@@ -89,7 +101,7 @@ export default async function DashboardPage() {
       <section className="flex flex-col gap-3 md:flex-row md:items-end justify-between border-b border-[#E5E5E5]/50 pb-6">
         <div>
           <h2 className="font-display-lg text-[28px] sm:text-[32px] font-bold text-primary tracking-tight leading-tight">
-            Good Evening, {userName} 👋
+            {greeting}, {userName} 👋
           </h2>
           <p className="font-body-md text-on-surface-variant text-[14px] mt-1">
             Here is your performance snapshot and sponsorship feed for today.
